@@ -5,6 +5,36 @@ date: "29 de septiembre de 2017"
 output: html_document
 ---
 getwd()
-library(ggplot)
-library(dplyr)
-Data<-read.table(DataPaper,header=TRUE, sep=",")
+install.packages(c('ggpubr','gridExtra'))
+library(ggplot2)
+library(gridExtra)
+
+Data=DataPaper
+
+BERW<-ggplot(Data, aes(x=BERW)) + 
+	geom_histogram(color="black",fill="gray")+
+	labs(title="Berry Weight Histogram",x="Berry Weight (gr)", y = "Density")+
+theme_classic()
+
+SEDW<-ggplot(Data, aes(x=SEDW)) + 
+	geom_histogram(color="black",fill="gray")+
+	labs(title="Seed Weigth Histogram",x="Seed Weigth (gr)", y = "Density")+
+theme_classic()
+
+FIRM<-ggplot(Data, aes(x=FIRM)) + 
+	geom_histogram(color="black",fill="gray")+
+	labs(title="Firmness Histogram",x="Firmness (Gr.mm-1)", y = "Density")+
+theme_classic()
+
+Color<-ggplot(Data, aes(x=COLR)) + 
+	geom_histogram(color="black",fill="gray")+
+	labs(title="Color Histogram",x="Color (Arbitrary Unit Color)", y = "Density")+
+theme_classic()
+
+ggarrange(BERW, SEDW, FIRM, Color, 
+          labels = c("A", "B", "C","D"),
+          ncol = 2, nrow = 2)
+
+corr <- round(cor(a), 1)
+head(corr[, 1:6])
+

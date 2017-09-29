@@ -1,0 +1,10 @@
+---
+title: "Plot and Manuscript"
+author: "Reynaldo"
+date: "29 de septiembre de 2017"
+output: html_document
+---
+getwd()
+library(ggplot)
+library(dplyr)
+Data<-read.table(DataPaper,header=TRUE, sep=",")
